@@ -58,6 +58,7 @@ const displaySingleCampus = function (campus) {
     campusLibraryElement.appendChild(backToAllCampuses);
 
 }
+
 const clearChildren = function (element) {
     while (element.firstChild) {
         element.removeChild(element.lastChild);
@@ -65,5 +66,6 @@ const clearChildren = function (element) {
 }
 
 export {
-    displaySingleCampus
+    displaySingleCampus,
+    clearChildren
 }

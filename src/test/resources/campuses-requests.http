@@ -6,7 +6,7 @@ Accept: application/json
 GET localhost:8080/api/campuses/1
 
 ### Delete a campus with the given id.
-DELETE localhost:8080/api/campuses/1
+DELETE http://localhost:8080/api/campuses/1
 
 ### Post a new campus resource.
 POST http://localhost:8080/api/campuses

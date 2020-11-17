@@ -1,9 +1,6 @@
 package org.wcci.campuslibraries.resources;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +11,7 @@ public class Campus {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany(mappedBy = "campus")
+    @OneToMany(mappedBy = "campus", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books;
 
     protected Campus() {
