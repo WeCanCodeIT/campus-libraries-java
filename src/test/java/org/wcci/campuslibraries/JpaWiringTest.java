@@ -56,12 +56,12 @@ public class JpaWiringTest {
         authorRepo.save(testAuthor2);
         Campus testCampus = new Campus("location", "techStack");
         campusRepo.save(testCampus);
-        Book testBook = new Book(testCampus, "title", "summary", true, testAuthor1, testAuthor2);
+        Book testBook = new Book(null, "title", "summary", true, testAuthor1, testAuthor2);
         bookRepo.save(testBook);
         flushAndClear();
         Book retrievedBook = bookRepo.findById(testBook.getId()).get();
         assertThat(retrievedBook.getAuthors()).contains(testAuthor1,testAuthor2);
-        assertThat(retrievedBook.getCampus()).isEqualTo(testCampus);
+//        assertThat(retrievedBook.getCampus()).isEqualTo(testCampus);
         assertThat(retrievedBook).isEqualTo(testBook);
     }
     @Test

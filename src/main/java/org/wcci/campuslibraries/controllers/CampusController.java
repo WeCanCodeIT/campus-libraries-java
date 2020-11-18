@@ -1,16 +1,20 @@
 package org.wcci.campuslibraries.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import org.wcci.campuslibraries.resources.Book;
 import org.wcci.campuslibraries.resources.Campus;
+import org.wcci.campuslibraries.storage.BookRepository;
 import org.wcci.campuslibraries.storage.CampusStorage;
 
 @RestController
 public class CampusController {
 
     private CampusStorage campusStorage;
+    private BookRepository bookRepo;
 
-    public CampusController(CampusStorage campusStorage) {
+    public CampusController(CampusStorage campusStorage, BookRepository bookRepo) {
         this.campusStorage = campusStorage;
+        this.bookRepo = bookRepo;
     }
 
     @GetMapping("/api/campuses")
@@ -42,6 +46,13 @@ public class CampusController {
         campusToChangeName.changeLocation(newLocation);
         campusStorage.saveCampus(campusToChangeName);
         return campusToChangeName;
+    }
+    @PatchMapping("/api/campuses/{campusId}/books")
+    public Campus addBookToCampus(@RequestBody Book bookToAdd,@PathVariable long campusId){
+        Campus campus = campusStorage.retrieveCampusById(campusId);
+        Book book = new Book(campus, bookToAdd.getTitle(), bookToAdd.getSummary(), true);
+        bookRepo.save(book);
+        return campusStorage.retrieveCampusById(campusId);
     }
 
 

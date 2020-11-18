@@ -26,7 +26,8 @@ PATCH http://localhost:8080/api/campuses/1/location
 Clintonville
 
 ### Add a new book resource to the campus's books
-PATCH http://localhost:8080/api/campuses/1/books
+POST http://localhost:8080/api/books
 Content-Type: application/json
 
-{"title": "New Book","summary": "This is a sample book.","available": true,"authors": [{"name": "Sample Author"}, {"name": "Another Sample Author"}]}
+{"campus": {"id": 30,"location":"Mars", "techStack": "SmallTalk" },"title": "New Book","summary": "This is a sample book.","available": true}
+

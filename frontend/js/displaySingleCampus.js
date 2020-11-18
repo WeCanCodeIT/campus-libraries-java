@@ -37,14 +37,36 @@ const displaySingleCampus = function (campus) {
         bookTitle.addEventListener('click', () => alert(`This book's summary: ${book.summary}`))
     });
 
+    const newBookForm = document.createElement("form");
+    newBookForm.innerHTML = `
+        <input class="title-input" placeholder="Title" type="text">
+        <input class="summary-input" placeholder="Summary" type="textbox">
+        <button class="submit-new-book">Submit New Book</button>
+    `
+    newBookForm.querySelector(".submit-new-book").addEventListener('click', (clickEvent) => {
+        clickEvent.preventDefault();
+        clearChildren(mainContent);
+        const bookJson = {
+            "title": newBookForm.querySelector(".title-input").value,
+            "summary": newBookForm.querySelector(".summary-input").value
+        }
+        fetch("http://localhost:8080/api/campuses/1/books", {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bookJson)
+            })
+            .then(response => response.json())
+            .then(campus => displaySingleCampus(campus))
+            .catch(err => console.error(err))
+    })
+    campusLibraryElement.appendChild(newBookForm);
+
     const backToAllCampuses = document.createElement("a");
     backToAllCampuses.classList.add("back-navigation");
     backToAllCampuses.innerText = "back to campus listings"
 
-    // backToAllCampuses.addEventListener('click', clickEvent => {
-    //     clearChildren(mainContent);
-    //     mainContent.appendChild(displayHomeView(allCampuses));
-    // });
 
     backToAllCampuses.addEventListener('click', () => {
         clearChildren(mainContent);

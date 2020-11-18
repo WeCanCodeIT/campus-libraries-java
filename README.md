@@ -43,3 +43,11 @@ A workshop project for module 5.
  | * | `POST` | `/authors` | Create new author | FALSE |
  |  | `PUT` | `/authors/{id}` | Update author for given id | TRUE |
  |  | `PATCH` | `/authors/{id}/name` | Update author name for author with given id | TRUE |
+
+
+
+ Wednesday Todo List
+
+ - Get campuses from API on load.
+ - Post a new campus
+ - Patch a new book to campus

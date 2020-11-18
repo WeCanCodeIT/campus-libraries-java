@@ -1,6 +1,7 @@
 package org.wcci.campuslibraries.resources;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,8 +12,8 @@ public class Campus {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany(mappedBy = "campus", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Book> books;
+    @OneToMany(mappedBy = "campus", orphanRemoval = true)
+    private List<Book> books = Collections.EMPTY_LIST;
 
     protected Campus() {
     }
@@ -20,6 +21,7 @@ public class Campus {
     public Campus(String location, String techStack) {
         this.location = location;
         this.techStack = techStack;
+
     }
 
     public Long getId() {

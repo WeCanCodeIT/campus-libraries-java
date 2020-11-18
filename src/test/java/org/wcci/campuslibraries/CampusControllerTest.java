@@ -6,6 +6,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.wcci.campuslibraries.controllers.CampusController;
 import org.wcci.campuslibraries.resources.Campus;
+import org.wcci.campuslibraries.storage.BookRepository;
 import org.wcci.campuslibraries.storage.CampusStorage;
 
 import java.util.Collections;
@@ -25,7 +26,8 @@ public class CampusControllerTest {
     @BeforeEach
     void setUp() {
         campusStorage = mock(CampusStorage.class);
-        underTest = new CampusController(campusStorage);
+        BookRepository bookRepo = mock(BookRepository.class);
+        underTest = new CampusController(campusStorage, bookRepo);
         when(campusStorage.retrieveAllCampuses()).thenReturn(Collections.singletonList(new Campus("Test Town", "FORTRAN")));
     }
 
